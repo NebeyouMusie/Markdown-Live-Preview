@@ -6,7 +6,8 @@ marked.setOptions({
 });
 
 export const convertMarkdownToHtml = (markdown: string): string => {
-  return marked.parse(markdown);
+  // Using marked.parse with a type assertion to handle the return type
+  return marked.parse(markdown) as string;
 };
 
 export const copyToClipboard = async (text: string): Promise<boolean> => {
