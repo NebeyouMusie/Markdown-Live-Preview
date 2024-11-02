@@ -1,5 +1,4 @@
 import { marked } from 'marked';
-import hljs from 'highlight.js';
 
 marked.setOptions({
   breaks: true,
@@ -7,11 +6,7 @@ marked.setOptions({
 });
 
 export const convertMarkdownToHtml = (markdown: string): string => {
-  const html = marked.parse(markdown, {
-    breaks: true,
-    gfm: true,
-  });
-  return html;
+  return marked.parse(markdown);
 };
 
 export const copyToClipboard = async (text: string): Promise<boolean> => {

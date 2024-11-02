@@ -1,6 +1,5 @@
 import { useRef } from "react";
 import { Textarea } from "@/components/ui/textarea";
-import { insertMarkdownSyntax } from "@/lib/markdownUtils";
 
 interface MarkdownEditorProps {
   value: string;
@@ -15,21 +14,6 @@ export function MarkdownEditor({ value, onChange, onScroll }: MarkdownEditorProp
     if (textareaRef.current) {
       const { scrollTop, scrollHeight } = textareaRef.current;
       onScroll(scrollTop, scrollHeight);
-    }
-  };
-
-  const handleFormat = (syntax: string) => {
-    if (textareaRef.current) {
-      const start = textareaRef.current.selectionStart;
-      const end = textareaRef.current.selectionEnd;
-      const newText = insertMarkdownSyntax(value, syntax, start, end);
-      onChange(newText);
-      
-      // Reset focus and selection
-      setTimeout(() => {
-        textareaRef.current?.focus();
-        textareaRef.current?.setSelectionRange(start, end);
-      }, 0);
     }
   };
 
