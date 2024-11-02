@@ -3,17 +3,21 @@ import hljs from 'highlight.js';
 
 // Configure marked with highlight.js
 marked.setOptions({
-  highlight: function (code, lang) {
-    if (lang && hljs.getLanguage(lang)) {
-      return hljs.highlight(code, { language: lang }).value;
-    }
-    return hljs.highlightAuto(code).value;
-  },
+  langPrefix: 'hljs language-',
+  gfm: true,
   breaks: true,
 });
 
 export const convertMarkdownToHtml = (markdown: string): string => {
-  return marked(markdown);
+  const html = marked(markdown, {
+    highlight: (code, lang) => {
+      if (lang && hljs.getLanguage(lang)) {
+        return hljs.highlight(code, { language: lang }).value;
+      }
+      return hljs.highlightAuto(code).value;
+    },
+  });
+  return html;
 };
 
 export const copyToClipboard = async (text: string): Promise<boolean> => {
