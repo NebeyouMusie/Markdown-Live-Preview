@@ -2,10 +2,9 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { ThemeToggle } from "@/components/ThemeToggle";
-import { Toolbar } from "@/components/Toolbar";
 import { MarkdownEditor } from "@/components/MarkdownEditor";
 import { MarkdownPreview } from "@/components/MarkdownPreview";
-import { copyToClipboard, convertMarkdownToHtml } from "@/lib/markdownUtils";
+import { copyToClipboard } from "@/lib/markdownUtils";
 import { Copy } from "lucide-react";
 
 const Index = () => {
@@ -20,12 +19,11 @@ const Index = () => {
   };
 
   const handleCopy = async () => {
-    const html = convertMarkdownToHtml(markdown);
-    const success = await copyToClipboard(html);
+    const success = await copyToClipboard(markdown);
     
     toast({
       title: success ? "Copied!" : "Failed to copy",
-      description: success ? "HTML copied to clipboard" : "Please try again",
+      description: success ? "Markdown copied to clipboard" : "Please try again",
       variant: success ? "default" : "destructive",
     });
   };
@@ -37,24 +35,14 @@ const Index = () => {
           <h1 className="text-2xl sm:text-3xl font-bold">Markdown Previewer</h1>
           <ThemeToggle />
         </div>
-        <p className="text-muted-foreground mb-4">
-          Write your Markdown on the left and see the preview on the right. Use the toolbar
-          for quick formatting options.
-        </p>
-        <div className="flex items-center justify-between">
-          <Toolbar
-            onFormatClick={(syntax) => {
-              // This will be handled by the editor component
-              console.log("Format:", syntax);
-            }}
-          />
+        <div className="flex items-center justify-end gap-2">
           <Button
             onClick={handleCopy}
             variant="outline"
             className="gap-2"
           >
             <Copy className="h-4 w-4" />
-            Copy HTML
+            Copy
           </Button>
         </div>
       </header>
@@ -76,20 +64,6 @@ const Index = () => {
           </div>
         </div>
       </main>
-
-      <footer className="max-w-7xl mx-auto mt-8 text-center text-sm text-muted-foreground">
-        <p>
-          Learn more about{" "}
-          <a
-            href="https://www.markdownguide.org/basic-syntax/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-primary hover:underline"
-          >
-            Markdown syntax
-          </a>
-        </p>
-      </footer>
     </div>
   );
 };
