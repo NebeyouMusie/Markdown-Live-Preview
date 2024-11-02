@@ -32,7 +32,7 @@ const Index = () => {
     <div className="min-h-screen bg-background p-4 sm:p-6 lg:p-8 animate-fade-in">
       <header className="max-w-7xl mx-auto mb-8">
         <div className="flex items-center justify-between mb-6">
-          <h1 className="text-2xl sm:text-3xl font-bold">Markdown Previewer</h1>
+          <h1 className="text-2xl sm:text-3xl font-bold">Markdown Live Preview</h1>
           <ThemeToggle />
         </div>
         <div className="flex items-center justify-end gap-2">
@@ -42,7 +42,7 @@ const Index = () => {
             className="gap-2"
           >
             <Copy className="h-4 w-4" />
-            Copy
+            Copy Markdown
           </Button>
         </div>
       </header>
